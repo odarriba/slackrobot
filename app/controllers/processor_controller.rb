@@ -25,7 +25,7 @@ class ProcessorController < ApplicationController
         if (message.text == '/config' || message.text == '/config@SlackRobot')
           resp ||= FantasticRobot::Request::SendMessage.new({
             chat_id: message.chat.id,
-            text: "You can use [this control panel](#{responses_url(id: chat.id, telegram_id: chat.telegram_id)}) to configure my behaviour :)",
+            text: "You can use [this control panel](#{responses_url(chat_id: chat.id, telegram_id: chat.telegram_id)}) to configure my behaviour :)",
             parse_mode: "Markdown",
             disable_web_page_preview: true,
             reply_to_message_id: message.message_id
