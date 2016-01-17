@@ -1,0 +1,54 @@
+<div class="page-header clearfix">
+  <h1>
+    View a response
+    <small>
+      <%= "#{@chat.is_group ? "group chat titled" : "chat with"} #{@chat.title}" %>
+    </small>
+  </h1>
+</div>
+<%= bootstrap_flash %>
+<div class='form-horizontal'>
+  <div class="form-group">
+    <label for="response_queries" class="col-md-offset-1 col-sm-3 control-label">When someone says...</label>
+    <div class="col-md-7 col-sm-9">
+      <p class="form-control-static"><%= raw @response.queries.join("<br />") %></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="response_responses" class="col-md-offset-1 col-sm-3 control-label">SlackRobot respond...</label>
+    <div class="col-md-7 col-sm-9">
+      <p class="form-control-static"><%= raw @response.responses.join("<br />") %></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-md-offset-4 col-md-6 col-sm-9">
+      <hr class='divider' />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="response_markdown" class="col-md-offset-1 col-sm-3 control-label">Use <i>Markdown</i> syntax</label>
+    <div class="col-md-7 col-sm-9">
+      <p class="form-control-static"><%= (@response.markdown) ? "Yes, use basic Markdown syntax" : "No, use plain text" %></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="response_reply" class="col-md-offset-1 col-sm-3 control-label">Reply to queries</label>
+    <div class="col-md-7 col-sm-9">
+      <p class="form-control-static"><%= (@response.reply) ? "Yes, send the message as a reply" : "No, just send a message" %></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-md-offset-4 col-md-6 col-sm-9">
+      <hr class='divider' />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-4 col-md-6 col-sm-12">
+      <div class='pull-right'>
+        <%= link_to "<i class='fa fa-pencil'></i><span class='hidden-sm hidden-xs'>&nbsp;&nbsp;Edit response</span>".html_safe, edit_response_path(chat_id: @chat.id, telegram_id: @chat.telegram_id, id: @response.id), :class => "btn btn-info", :title => "Edit response" %>
+        <%= link_to "<i class='fa fa-trash-o'></i><span class='hidden-sm hidden-xs'>&nbsp;&nbsp;Delete response</span>".html_safe, response_path(chat_id: @chat.id, telegram_id: @chat.telegram_id, id: @response.id), :class => "btn btn-danger", :title => "Delete response", :data => {:confirm => "Do you really want to delete this response?", :method => :delete} %>
+      </div>
+      <%= link_to "<i class='fa fa-chevron-left'></i><span class='hidden-sm hidden-xs'>&nbsp;&nbsp;Go back</span>".html_safe, responses_path(chat_id: @chat.id, telegram_id: @chat.telegram_id), :class => "btn btn-default pull-left" %>
+    </div>
+  </div>
+</div>
