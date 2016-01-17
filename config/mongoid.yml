@@ -135,7 +135,7 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
-        
+
 production:
   clients:
     default:
@@ -143,7 +143,7 @@ production:
      # replica set connection setup.
      # Use environment variables or a config file to keep your
      # credentials safe e.g. <%= ENV['MONGOLAB_URI'] %>.
-     uri: mongodb://username:password@host1:port1,host2:port2/database
+     uri: <%= ENV['MONGOLAB_URI'] %>
 
      options:
        # The default timeout is 5, which is the time in seconds
