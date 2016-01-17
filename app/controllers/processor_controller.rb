@@ -22,19 +22,29 @@ class ProcessorController < ApplicationController
           text: "Hello! I'm SlackRobot, and I'm here to help you.\nIf you want to configure me, issue the /config command."
         })
       else
-        response = chat.responses.for_js("for(var i in this.queries){ if (param.indexOf(this.queries[i]) > -1) return true; }", param: message.text).first
-
-        unless (response.blank?)
-          # Found a valid response
-          resp = FantasticRobot::Request::SendMessage.new({
-            chat_id: message.chat.id
+        if (message.text == '/config' || message.text == '/config@SlackRobot')
+          resp ||= FantasticRobot::Request::SendMessage.new({
+            chat_id: message.chat.id,
+            text: "You can use [this control panel](#{responses_url(id: chat.id, telegram_id: chat.telegram_id)}) to configure my behaviour :)",
+            parse_mode: "Markdown",
+            disable_web_page_preview: true,
+            reply_to_message_id: message.message_id
           })
+        else
+          response = chat.responses.for_js("for(var i in this.queries){ if (param.indexOf(this.queries[i]) > -1) return true; }", param: message.text).first
 
-          resp.text = response.responses.sample
+          unless (response.blank?)
+            # Found a valid response
+            resp ||= FantasticRobot::Request::SendMessage.new({
+              chat_id: message.chat.id,
+              text: response.responses.sample
+            })
 
-          resp.reply_to_message_id = message.message_id if (response.reply)
+            resp.parse_mode = "Markdown" if (response.markdown)
+            resp.reply_to_message_id = message.message_id if (response.reply)
 
-          result = resp
+            result = resp
+          end
         end
       end
     end
