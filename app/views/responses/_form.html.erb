@@ -1,0 +1,55 @@
+<% if (!resource.errors[:queries].blank?) %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    There must be at least one query.
+  </div>
+<% elsif (!resource.errors[:responses].blank?) %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    There must be at least one response.
+  </div>
+<% end %>
+<%= form_for resource, :url => url, :html => {:class => "form-horizontal"} do |f| %>
+  <div class="form-group<% if (!resource.errors[:queries].blank?) %> has-error<% end %>">
+    <label for="response_queries" class="col-md-offset-1 col-sm-2 control-label">When someone says...</label>
+    <div class="col-md-7 col-sm-10">
+      <%= f.text_area :queries, :value => resource.queries.join("\n"), :rows => 5, :class => "form-control", :required => true %>
+      <span class="help-block">You can separate multiple queries with line breaks</span>
+    </div>
+  </div>
+  <div class="form-group<% if (!resource.errors[:responses].blank?) %> has-error<% end %>">
+    <label for="response_responses" class="col-md-offset-1 col-sm-2 control-label">SlackRobot respond...</label>
+    <div class="col-md-7 col-sm-10">
+      <%= f.text_area :responses, :value => resource.responses.join("\n"), :rows => 5, :class => "form-control", :required => true %>
+      <span class="help-block">You can separate multiple responses with line breaks</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-md-offset-3 col-md-7 col-sm-10">
+      <hr class='divider' />
+    </div>
+  </div>
+  <div class="form-group<% if (!resource.errors[:markdown].blank?) %> has-error<% end %>">
+    <label for="response_markdown" class="col-md-offset-1 col-sm-2 control-label">Use <i>Markdown</i> syntax</label>
+    <div class="col-md-7 col-sm-10">
+      <%= f.select :markdown, options_for_select({"Yes, use basic Markdown syntax" => true, "No, use plain text" => false}, :selected => resource.markdown), {}, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group<% if (!resource.errors[:reply].blank?) %> has-error<% end %>">
+    <label for="response_reply" class="col-md-offset-1 col-sm-2 control-label">Reply to queries</label>
+    <div class="col-md-7 col-sm-10">
+      <%= f.select :reply, options_for_select({"Yes, send the message as a reply" => true, "No, just send a message" => false}, :selected => resource.reply), {}, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-md-offset-3 col-md-7 col-sm-10">
+      <hr class='divider' />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-3 col-md-7 col-sm-12">
+      <%= f.button "Save the response&nbsp;&nbsp;<i class='fa fa-chevron-right'></i>".html_safe, :type => "submit", :class => "btn btn-primary pull-right" %>
+      <%= link_to "<i class='fa fa-chevron-left'></i><span class='hidden-sm hidden-xs'>&nbsp;&nbsp;Go back</span>".html_safe, responses_path(chat_id: @chat.id, telegram_id: @chat.telegram_id), :class => "btn btn-default pull-left" %>
+    </div>
+  </div>
+<% end %>

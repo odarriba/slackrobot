@@ -25,6 +25,19 @@ class ResponsesController < ApplicationController
   end
 
   def create
+    @response = Response.new(response_params)
+    @response.chat = @chat
+
+    respond_to do |format|
+      format.html {
+        if (@response.save)
+          flash[:info] = "Response sucessfully created."
+          redirect_to responses_path(chat_id: @chat.id, telegram_id: @chat.telegram_id)
+        else
+          render :action => :new
+        end
+      }
+    end
   end
 
   def edit
@@ -34,6 +47,16 @@ class ResponsesController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      format.html {
+        if (@response.update_attributes(response_params))
+          flash[:info] = "Response sucessfully updated."
+          redirect_to responses_path(chat_id: @chat.id, telegram_id: @chat.telegram_id)
+        else
+          render :action => :edit
+        end
+      }
+    end
   end
 
   def destroy
@@ -52,5 +75,13 @@ class ResponsesController < ApplicationController
 
   def load_response
     @response = @chat.responses.find(params[:id])
+  end
+
+  def response_params
+    clean_params = params.require(:response).permit(:queries, :responses, :markdown, :reply)
+    clean_params[:queries] = clean_params[:queries].split("\r\n")
+    clean_params[:responses] = clean_params[:responses].split("\r\n")
+
+    clean_params
   end
 end

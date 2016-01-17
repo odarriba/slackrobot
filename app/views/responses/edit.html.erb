@@ -1,0 +1,9 @@
+<div class="page-header clearfix">
+  <h1>
+    Edit a response
+    <small>
+      <%= "#{@chat.is_group ? "group chat titled" : "chat with"} #{@chat.title}" %>
+    </small>
+  </h1>
+</div>
+<%= render "form", :resource => @response, :url => response_path(chat_id: @chat.id, telegram_id: @chat.telegram_id, id: @response.id) %>
