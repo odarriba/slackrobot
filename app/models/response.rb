@@ -1,11 +1,11 @@
 class Response
   include Mongoid::Document
-  include Mongoid::Timestamp
+  include Mongoid::Timestamps
 
   field :queries,   type: Array
   field :responses, type: Array
-  field :markdown,  type: Boolean
-  field :reply,     type: Boolean
+  field :markdown,  type: Boolean, default: false
+  field :reply,     type: Boolean, default: false
 
   validates_presence_of :queries, :responses
 
