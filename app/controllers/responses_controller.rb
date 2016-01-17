@@ -31,7 +31,7 @@ class ResponsesController < ApplicationController
     respond_to do |format|
       format.html {
         if (@response.save)
-          flash[:info] = "Response sucessfully created."
+          flash[:notice] = "Response sucessfully created."
           redirect_to responses_path(chat_id: @chat.id, telegram_id: @chat.telegram_id)
         else
           render :action => :new
@@ -50,7 +50,7 @@ class ResponsesController < ApplicationController
     respond_to do |format|
       format.html {
         if (@response.update_attributes(response_params))
-          flash[:info] = "Response sucessfully updated."
+          flash[:notice] = "Response sucessfully updated."
           redirect_to responses_path(chat_id: @chat.id, telegram_id: @chat.telegram_id)
         else
           render :action => :edit
@@ -60,6 +60,16 @@ class ResponsesController < ApplicationController
   end
 
   def destroy
+    respond_to do |format|
+      format.html {
+        if (@response.destroy)
+          flash[:notice] = "Response sucessfully deleted."
+        else
+          flash[:error] = "Error while deleting the response."
+        end
+        redirect_to responses_path(chat_id: @chat.id, telegram_id: @chat.telegram_id)
+      }
+    end
   end
 
   private
