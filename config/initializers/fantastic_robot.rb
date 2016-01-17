@@ -9,4 +9,4 @@ FantasticRobot.configure do |config|
   config.callback_url = "https://#{ENV['TELEGRAM_API_CALLBACK_HOST']}/receive/#{ENV['TELEGRAM_API_CALLBACK_PATH']}"
 end
 
-#FantasticRobot.initialize! if(defined?(::Thin) || defined?(::Unicorn) || defined?(::Passenger) || defined?(::Puma))
+FantasticRobot.initialize! if(defined?(::Thin) || defined?(::Unicorn) || defined?(::Passenger) || defined?(::Puma))
