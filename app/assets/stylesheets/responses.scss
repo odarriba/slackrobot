@@ -1,0 +1,22 @@
+.table-responses {
+  thead {
+    th {
+      width: 37.5%;
+      &.controls {
+        width: 25%;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td.controls {
+        text-align: right;
+      }
+      &.no-results > td {
+        text-align: center;
+        padding: 20px;
+        font-size: 1.1em;
+      }
+    }
+  }
+}

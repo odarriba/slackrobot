@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   match "/receive/#{ENV['TELEGRAM_API_CALLBACK_PATH']}" => "processor#receive", as: :receive, via: [:get, :post]
 
-  scope '/config/:id/:telegram_id' do
+  scope '/config/:chat_id/:telegram_id' do
     resources :responses, path: ''
   end
 
