@@ -30,14 +30,26 @@
 
  /* Custom page header */
  .header {
-   padding-bottom: 20px;
+   padding-bottom: 10px;
    border-bottom: 1px solid #e5e5e5;
  }
  /* Make the masthead heading the same height as the navigation */
  .header h3 {
+   font-size: 2em;
    margin-top: 0;
    margin-bottom: 0;
-   line-height: 40px;
+   line-height: 60PX;
+ }
+
+ .header img.logo {
+   width: 60px;
+   height: 60px;
+   margin-top: -10px;
+   margin-right: 10px;
+ }
+
+ .header .nav {
+   margin-top: 8px;
  }
 
  /* Custom page footer */
@@ -91,5 +103,8 @@
    /* Remove the bottom border on the jumbotron for visual effect */
    .jumbotron {
      border-bottom: 0;
+   }
+   .jumbotron h1 {
+     font-size: 56px;
    }
  }

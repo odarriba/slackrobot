@@ -13,8 +13,9 @@ gem 'uglifier', '>= 1.3.0'
 # Mongoid as ODM
 gem 'mongoid', '~> 5.0.2'
 
-# Bootstrap
+# Bootstrap and FontAwesome
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'font-awesome-sass', '~> 4.5.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
