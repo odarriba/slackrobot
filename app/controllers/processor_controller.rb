@@ -32,6 +32,7 @@ class ProcessorController < ApplicationController
 
   def process_message msg
     return nil if (msg.text.blank?)
+    return nil if (msg.from.username == "SlackRobot")
 
     if (msg.text == '/config' || msg.text == '/config@SlackRobot')
       return FantasticRobot::Request::SendMessage.new({
