@@ -43,7 +43,7 @@ class ProcessorController < ApplicationController
         reply_to_message_id: msg.message_id
       })
     else
-      response = @chat.responses.for_js("for(var i in this.queries){ if (param.indexOf(this.queries[i]) > -1) return true; }", param: msg.text).first
+      response = @chat.responses.for_js("for(var i in this.queries){ if (param.match(new RegExp('\\\\b('+this.queries[i]+'\\\\b)', 'i')) !== null) return true; }", param: msg.text).first
 
       unless (response.blank?)
         # Found a valid response
