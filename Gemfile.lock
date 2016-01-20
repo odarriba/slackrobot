@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/odarriba/fantastic_robot.git
-  revision: 0d44a0ecb58dc4e163a63b4df390b9ceb4b1ad76
+  revision: 4062f9874b4aa32bd6fdeab5e6c59928675ec4e0
   branch: development
   specs:
     fantastic_robot (0.1.1)
