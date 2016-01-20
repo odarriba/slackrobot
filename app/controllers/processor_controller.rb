@@ -3,6 +3,7 @@ class ProcessorController < ApplicationController
 
   def receive
     result = {}
+    
     received_hash = JSON.parse(request.body.read)
     received_update = FantasticRobot::Model::Update.new(received_hash)
 
@@ -22,9 +23,12 @@ class ProcessorController < ApplicationController
           text: "Hello! I'm SlackRobot, and I'm here to help you.\nIf you want to configure me, issue the /config command."
         })
       else
-        resp = process_message(message) || []
+        resp = process_message(message)
       end
     end
+
+    resp = {} if (resp.blank?)
+
     render json: resp
   end
 
