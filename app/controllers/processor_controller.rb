@@ -3,7 +3,7 @@ class ProcessorController < ApplicationController
 
   def receive
     result = {}
-    
+
     received_hash = JSON.parse(request.body.read)
     received_update = FantasticRobot::Model::Update.new(received_hash)
 
@@ -47,7 +47,10 @@ class ProcessorController < ApplicationController
         reply_to_message_id: msg.message_id
       })
     else
-      response = @chat.responses.for_js("for(var i in this.queries){ if (param.match(new RegExp('\\\\b('+this.queries[i]+'\\\\b)', 'i')) !== null) return true; }", param: msg.text).first
+      response = @chat.responses.detect do |res|
+        # Search responses with queries that fit the message
+        !res.queries.index{ |query| msg.text =~ /\b#{query}\b/i }.blank?
+      end
 
       unless (response.blank?)
         # Found a valid response
