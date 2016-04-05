@@ -47,22 +47,26 @@ class ProcessorController < ApplicationController
         reply_to_message_id: msg.message_id
       })
     else
-      response = @chat.responses.detect do |res|
-        # Search responses with queries that fit the message
-        !res.queries.index{ |query| msg.text =~ /\b#{query}\b/i }.blank?
-      end
+      begin
+        response = @chat.responses.detect do |res|
+          # Search responses with queries that fit the message
+          !res.queries.index{ |query| msg.text =~ /\b#{query}\b/i }.blank?
+        end
 
-      unless (response.blank?)
-        # Found a valid response
-        resp ||= FantasticRobot::Request::SendMessage.new({
-          chat_id: msg.chat.id,
-          text: response.responses.sample
-        })
+        unless (response.blank?)
+          # Found a valid response
+          resp ||= FantasticRobot::Request::SendMessage.new({
+            chat_id: msg.chat.id,
+            text: response.responses.sample
+          })
 
-        resp.parse_mode = "Markdown" if (response.markdown)
-        resp.reply_to_message_id = msg.message_id if (response.reply)
+          resp.parse_mode = "Markdown" if (response.markdown)
+          resp.reply_to_message_id = msg.message_id if (response.reply)
 
-        return resp
+          return resp
+        end
+      rescue Exception => e
+        Rails.logger.info "[EXCEPTION] Rescued from exception: #{e.inspect}"
       end
     end
   end
