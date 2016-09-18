@@ -31,6 +31,9 @@ gem 'turbolinks'
 # Use Puma as the app server
 gem 'puma'
 
+# NewRelic
+gem 'newrelic_rpm'
+
 # 12 factor for Heroku
 gem 'rails_12factor', group: :production
 
