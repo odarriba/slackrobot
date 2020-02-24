@@ -100,7 +100,7 @@ GEM
       tzinfo (>= 0.3.37)
     multipart-post (2.0.0)
     newrelic_rpm (3.16.2.321)
-    nokogiri (1.10.4)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     origin (2.1.1)
     puma (2.15.3)
