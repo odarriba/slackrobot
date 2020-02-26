@@ -152,3 +152,4 @@ production:
        # We recommend 15 because it allows for plenty of time
        # in most operating environments.
        connect_timeout: 15
+       retry_writes: false
