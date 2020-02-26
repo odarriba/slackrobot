@@ -11,6 +11,7 @@ development:
       hosts:
         - localhost:27017
       options:
+        retry_writes: false
         # Change the default write concern. (default = { w: 1 })
         # write:
         #   w: 1
