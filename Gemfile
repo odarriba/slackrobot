@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "2.6.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5'
+gem 'rails', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -11,10 +11,10 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Mongoid as ODM
-gem 'mongoid', '~> 5.0.2'
+gem 'mongoid', '~> 7.0'
 
 #FantasticRobot for Telegram Bot API
-gem 'fantastic_robot', '~> 0.1.2'
+gem 'fantastic_robot', github: 'odarriba/fantastic_robot'
 
 # Bootstrap and FontAwesome
 gem 'bootstrap-sass', '~> 3.3.6'
