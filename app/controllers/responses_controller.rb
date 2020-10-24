@@ -1,6 +1,6 @@
 class ResponsesController < ApplicationController
-  before_filter :load_chat
-  before_filter :load_response, only: [:show, :edit, :update, :destroy]
+  before_action :load_chat
+  before_action :load_response, only: [:show, :edit, :update, :destroy]
 
   def index
     @responses = @chat.responses
