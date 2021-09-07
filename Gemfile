@@ -50,7 +50,7 @@ group :development do
   gem 'foreman', '~> 0.78.0'
 
   # Better error reporting
-  gem 'better_errors', '~> 2.1.1'
+  gem 'better_errors', '~> 2.9.1'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
