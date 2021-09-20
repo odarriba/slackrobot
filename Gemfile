@@ -14,7 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'mongoid', '~> 7.0'
 
 #FantasticRobot for Telegram Bot API
-gem 'fantastic_robot', github: 'odarriba/fantastic_robot'
+gem 'fantastic_robot', git: 'https://github.com/odarriba/fantastic_robot.git'
 
 # Bootstrap and FontAwesome
 gem 'bootstrap-sass', '~> 3.4.1'
